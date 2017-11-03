@@ -12,7 +12,7 @@ import random
 import timeit
 import time
 import threading
-import tooltips
+# import tooltips
 
 
 class Song:
@@ -121,12 +121,12 @@ class Play:
 			# print("글자수 : {}".format(self.len_letters))
 			# print("글자당 시간간격 : {}".format(time_per_letter))
 			song_info.see(str(round(self.line, 1)))
-		threading.Timer(time_per_letter+0.1, self.playing).start()
+			threading.Timer(time_per_letter+0.1, self.playing).start()
 
 	def play_music(self):
 		self.p.play()
 		p_btn.configure(text="Pause", command=self.pause_music)
-		self.playing()
+		# self.playing()
 
 	def pause_music(self):
 		self.p.pause()
