@@ -2947,67 +2947,636 @@
 # helpmenu.add_command(label="프로그램 정보", command=about)
 # window.mainloop()
 # ----------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+# file_name = input("파일 이름을 입력하세요: ")
+# with open(file_name, "r") as f:
+# 	print("파일 안에는 총 {}개의 글자가 있습니다.".format(len(f.read())))
+# ------------------------------------------------------
+# file_name = input("파일 이름을 입력하세요: ")
+# sub_str = input("삭제할 문자열을 입력하시오: ")
+
+# with open(file_name, "r+") as f:
+# 	sentence = f.read()
+# 	sub_str = sub_str.lower()
+# 	leng = len(sub_str)
+# 	while True:
+# 		if sub_str in sentence.lower():
+# 			idx = sentence.lower().find(sub_str)
+# 			sentence = sentence[:idx] + sentence[idx+leng:]
+# 			print("searched !!")
+# 		else:
+# 			print("not found...")
+# 			break
+# 	print(sentence)
+
+# with open(file_name, "w") as f:
+# 	f.write(sentence)
+# --------------------------------------------------
+# ALPABET_NUM = 26
+# freq_list = [0]*ALPABET_NUM
+# # print(freq_list)
+# file_name = input("입력 파일 이름: ")
+# with open(file_name, "r") as f:
+# 	sentence = f.read()
+# 	for ch in sentence:
+# 		ch = ord(ch.lower())
+# 		if ch >= 97 and ch <= 122:
+# 			freq_list[ch-97] += 1
+
+
+# for i, freq in enumerate(freq_list):
+# 	print("{} : {}".format(chr(i+97), freq))
+# -----------------------------------------------------
+# import pickle
+
+# pack = [
+# 	12,
+# 	3.14,
+# 	[1, 2, 3, 4, 5]
+# ]
+
+# with open("pack.dat", "wb") as f:
+# 	pickle.dump(pack, f)
+
+# with open("pack.dat", "rb") as f:
+# 	obj = pickle.load(f)
+# 	for item in obj:
+# 		print(item)
+# -----------------------------------------------------
+# input_file = input("입력 파일 이름: ")
+# output_file = input("출력 파일 이름: ")
+# total = 0.0
+# cnt = 0
+# with open(input_file, "r") as f:
+# 	for num in f:
+# 		total += float(num)
+# 		cnt += 1
+
+# print("합계={}".format(total))
+# print("평균={}".format(total/cnt))
+# ----------------------------------------------------
+# from tkinter import *
+# import pickle
+
+# def entry_update(data):
+# 	e_list[0].delete(0, END)
+# 	e_list[1].delete(0, END)
+# 	e_list[0].insert(0, data["name"])
+# 	e_list[1].insert(0, data["phone"])
+
+# def create_widget(text, name):
+# 	f = Frame(window)
+# 	f.pack(padx=5)
+# 	l = Label(f, text=text, width=10)
+# 	l.pack(side=LEFT)
+# 	e = Entry(f, width=37)
+# 	e.pack()
+# 	e_list.append(e)
+	
+# def create_btn(text, com):
+# 	b = Button(window, text=text, command=com)
+# 	b.pack(side=LEFT, padx=1)
+
+# def add_info():
+# 	human_info = {}
+# 	if e_list[0].get() != "" and e_list[1].get() != "":
+# 		human_info["name"] = e_list[0].get().strip()
+# 		human_info["phone"] = e_list[1].get().strip()
+
+# 		with open(file_name, "rb") as f:
+# 			try:
+# 				phone_book = pickle.load(f)
+# 			except:
+# 				phone_book = []
+# 		with open(file_name, "wb") as f:
+# 			phone_book.append(human_info)
+# 			pickle.dump(phone_book, f)
+# 		print("add")
+# 	else:
+# 		print("empty input...")
+
+# def first_info():
+# 	global pos 
+# 	with open(file_name, "rb") as f:
+# 		pos = 0
+# 		info_first = pickle.load(f)[pos]
+# 		entry_update(info_first)
+# 	print("first")
+
+# def next_info():
+# 	global pos
+# 	with open(file_name, "rb") as f:
+# 		phone_book = pickle.load(f)
+# 		pos = (pos + 1) % len(phone_book)
+# 		info_next = phone_book[pos]
+# 		entry_update(info_next)
+# 	print("next")
+
+# def prev_info():
+# 	global pos
+# 	with open(file_name, "rb") as f:
+# 		phone_book = pickle.load(f)
+# 		pos = (pos - 1) % len(phone_book)
+# 		info_prev = phone_book[pos]
+# 		entry_update(info_prev)
+# 	print("prev")
+
+# def last_info():
+# 	global pos
+# 	with open(file_name, "rb") as f:
+# 		pos = -1
+# 		info_first = pickle.load(f)[pos]
+# 		entry_update(info_first)
+# 	print("last")
+
+# def read_info():
+# 	with open(file_name, "rb") as f:
+# 		try:
+# 			phone_book = pickle.load(f)
+# 			for human_info in phone_book:
+# 				print(human_info)
+# 		except:
+# 			print("empty info...")
+# 	# print("read")
+
+# window = Tk()
+# e_list = []
+# create_widget("이름", "name")
+# create_widget("전화번호", "phone")
+# create_btn("추가", add_info)
+# create_btn("처음", first_info)
+# create_btn("다음", next_info)
+# create_btn("이전", prev_info)
+# create_btn("마지막", last_info)
+# create_btn("파일읽기", read_info)
+
+# pos = 0
+# file_name = "phone_book.dat"
+# try:
+# 	open(file_name, "x")
+# except FileExistsError:
+# 	pass
+# window.mainloop()
+# --------------------------------------------------
+# from PIL import Image, ImageTk
+# import tkinter as tk
+
+# window = tk.Tk()
+# canvas = tk.Canvas(window, width=500, height=500)
+# canvas.pack()
+
+# img = Image.open("003 수란 (SURAN) - 오늘 취하면 (Feat.창모) (Prod. SUGA).jpg")
+# tk_img = ImageTk.PhotoImage(img)
+# canvas.create_image(250, 250, image=tk_img)
+
+# window.mainloop()
+# --------------------------------------------------
+# from PIL import Image, ImageTk
+# import tkinter as tk
+
+# window = tk.Tk()
+# canvas = tk.Canvas(window, width=500, height=500)
+# canvas.pack()
+
+# im = Image.open("003 수란 (SURAN) - 오늘 취하면 (Feat.창모) (Prod. SUGA).jpg")
+# out = im.rotate(45)
+# tk_img = ImageTk.PhotoImage(out)
+
+# canvas.create_image(250, 250, image=tk_img)
+# window.mainloop()
+# --------------------------------------------------
+# from PIL import Image, ImageTk, ImageFilter
+# import tkinter as tk
+
+# window = tk.Tk()
+# canvas = tk.Canvas(window, width=500, height=500)
+# canvas.pack()
+
+# im = Image.open("003 수란 (SURAN) - 오늘 취하면 (Feat.창모) (Prod. SUGA).jpg")
+# out = im.filter(ImageFilter.BoxBlur(2))
+# tk_img = ImageTk.PhotoImage(out)
+
+# canvas.create_image(250, 250, image=tk_img)
+# window.mainloop()
+# ----------------------------------------------------
+# from PIL import Image, ImageTk, ImageFilter
+# import tkinter as tk
+# from tkinter import filedialog as fd 
+
+# im =  None
+# tk_img = None
+# deg = 45
+
+# def open():
+# 	global im, tk_img
+# 	fname = fd.askopenfilename()
+# 	im = Image.open(fname)
+# 	tk_img = ImageTk.PhotoImage(im)
+# 	canvas.create_image(250, 250, image=tk_img)
+# 	window.update()
+
+# def quit():
+# 	window.quit()
+
+# def image_rotate():
+# 	global im, tk_img, deg
+# 	out = im.rotate(deg)
+# 	tk_img = ImageTk.PhotoImage(out)
+# 	canvas.create_image(250, 250, image=tk_img)
+# 	window.update()
+# 	deg = (deg + 45) % 360
+
+# def image_blur():
+# 	global im, tk_img, deg
+# 	out = im.rotate(deg - 45)
+# 	out = out.filter(ImageFilter.BLUR)
+# 	tk_img = ImageTk.PhotoImage(out)
+# 	canvas.create_image(250, 250, image=tk_img)
+# 	window.update()
+
+# window = tk.Tk()
+# canvas = tk.Canvas(window, width=500, height=500)
+# canvas.pack()
+
+# menubar = tk.Menu(window)
+# filemenu = tk.Menu(menubar)
+# ipmenu = tk.Menu(menubar)
+# filemenu.add_command(label="열기", command=open)
+# filemenu.add_command(label="종료", command=quit)
+# ipmenu.add_command(label="영상회전", command=image_rotate)
+# ipmenu.add_command(label="영상흐리게", command=image_blur)
+# menubar.add_cascade(label="파일", menu=filemenu)
+# menubar.add_cascade(label="영상처리", menu=ipmenu)
+
+# window.config(menu=menubar)
+# window.mainloop()
+# --------------------------------------------------
+# class Car:
+# 	def __init__(self, speed, color, model):
+# 		self.speed = speed
+# 		self.color = color
+# 		self.model = model
+
+# 	def drive(self):
+# 		self.speed = 60
+
+# myCar = Car(0, "blue", "E-Class")
+# print("speed : {}".format(myCar.speed))
+# print("color : {}".format(myCar.color))
+# print("model : {}".format(myCar.model))
+
+# myCar.drive()
+# print("speed : {}".format(myCar.speed))
+# ------------------------------------------------------
+# class Car:
+# 	def __init__(self, speed, color, model):
+# 		self.speed = speed
+# 		self.color = color
+# 		self.model = model
+
+# 	def __str__(self):
+# 		msg = "속도:"+str(self.speed)+" 색상:"+self.color+" 모델:"+self.model
+# 		return msg 
+
+# 	def drive(self):
+# 		self.speed = 60
+
+# dadCar = Car(0, "silver", "A6")
+# momCar = Car(0, "white", "520d")
+# myCar = Car(0, "blue", "E-Class")
+
+# print(myCar)
+# --------------------------------------------------
+# import turtle
+
+# t1 = turtle.Turtle()
+# t2 = turtle.Turtle()
+# t3 = turtle.Turtle()
+# t1.shape("circle")
+# t2.shape("turtle")
+# t3.shape("square")
+# t1.penup()
+# t2.penup()
+# t3.penup()
+# t1.goto(0, -100)
+# t2.goto(0, -150)
+# t3.goto(0, -200)
+# t1.pendown()
+# t2.pendown()
+# t3.pendown()
+
+# while True:
+# 	t1.circle(100)
+# 	t2.circle(150)
+# 	t3.circle(200)
+# ------------------------------------------------
+# from turtle import *
+
+# class Car:
+# 	def __init__(self, speed, color, model):
+# 		self.speed = speed
+# 		self.color = color
+# 		self.model = model
+# 		self.turtle = Turtle()
+# 		self.turtle.shape("car.gif")
+
+# 	def drive(self):
+# 		self.turtle.forward(self.speed)
+
+# 	def left_turn(self):
+# 		self.turtle.left(90)
+
+# register_shape("car.gif")
+# myCar = Car(200, "red", "E-Class")
+# for i in range(100):
+# 	myCar.drive()
+# 	myCar.left_turn()
+# --------------------------------------------------
+# from turtle import *
+
+# class Ball:
+# 	def __init__(self, color, size, speed):
+# 		self.xspeed = speed
+# 		self.yspeed = speed
+# 		self.x = 0
+# 		self.y = 0
+
+# 		self.turtle = Turtle()
+# 		self.turtle.shape("circle")
+# 		self.turtle.color(color, color)
+# 		self.turtle.resizemode("user")
+# 		self.turtle.shapesize(size, size, 10)
+
+# 	def move(self):
+# 		self.x += self.xspeed
+# 		self.y += self.yspeed
+# 		self.turtle.goto(self.x, self.y)
+
+# ball = Ball("green", 3, 3)
+# for i in range(100):
+# 	ball.move()
+
+# mainloop()
+# --------------------------------------------------
+# from turtle import *
+
+# class MyTurtle(Turtle):
+# 	def glow(self, x, y):
+# 		self.fillcolor("red")
+
+# turtle = MyTurtle()
+# turtle.shape("turtle")
+# turtle.onclick(turtle.glow)
+
+# mainloop()
+# ---------------------------------------------------
+# PI = 3.141592
+
+# class Circle:
+# 	def __init__(self, radius):
+# 		self.radius = radius
+
+# 	def __str__(self):
+# 		area = self.calcArea()
+# 		perimeter = self.calcPerimeter()
+# 		str_format = "반지름: {}, 원의 면적: {}, 원의 둘레: {}".format(self.radius, area, perimeter)
+# 		return str_format
+
+# 	def calcPerimeter(self):
+# 		return 2*PI*self.radius
+
+# 	def calcArea(self):
+# 		return PI*self.radius**2
+
+# circle = Circle(100)
+# print(circle)
+# ---------------------------------------------------
+# class Tv:
+# 	def __init__(self, channel, volume, state):
+# 		self.channel = channel
+# 		self.volume = volume
+# 		self.state = state
+
+# 	def turnOn(self):
+# 		self.state = "on"
+
+# 	def turnOff(self):
+# 		self.state = "off"
+
+# 	def setChannel(self, channel):
+# 		self.channel = channel
+
+# 	def setVolume(self, volume):
+# 		self.volume = volume
+
+# tv = Tv(12, 15, "off")
+# print("state: {}".format(tv.state))
+# tv.turnOn()
+# print("state: {}".format(tv.state))
+
+# print("channel: {}".format(tv.channel))
+# tv.setChannel(3)
+# print("channel: {}".format(tv.channel))
+
+# print("volume: {}".format(tv.volume))
+# tv.setVolume(30)
+# print("volume: {}".format(tv.volume))
+# -----------------------------------------------------
+# import turtle
+
+# c = turtle.Turtle()
+# t = turtle.Turtle()
+# c.shape("circle")
+# t.shape("turtle")
+
+# c.left(180)
+# c.forward(100)
+# c.right(90)
+# c.forward(20)
+# c.left(90)
+# c.forward(100)
+
+# t.forward(100)
+# t.right(90)
+# t.forward(20)
+# t.left(90)
+# t.forward(100)
+
+# turtle.mainloop()
+# -------------------------------------------------
+# import turtle
+
+# class MyTurtle(turtle.Turtle):
+# 	def drawSquare(self):
+# 		for i in range(4):
+# 			self.right(90)
+# 			self.forward(100)
+
+# my_turtle = MyTurtle()
+# my_turtle.speed(1)
+# my_turtle.forward(100)
+# my_turtle.drawSquare()
+
+# turtle.mainloop()
+# ---------------------------------------------------
+# from tkinter import *
+# import time
+# import random
+
+# class Ball:
+# 	def __init__(self, canvas, color, size, x, y, xspeed, yspeed):
+# 		self.canvas = canvas
+# 		self.color = color
+# 		self.size = size
+# 		self.x = x
+# 		self.y = y
+# 		self.xspeed = xspeed
+# 		self.yspeed = yspeed
+# 		self.id = canvas.create_oval(x, y, x+size, y+size, fill=color)
+
+# 	def move(self):
+# 		self.canvas.move(self.id, self.xspeed, self.yspeed)
+# 		(x1, y1, x2, y2) = self.canvas.coords(self.id)
+# 		if x1 <= 0 or x2 >= WIDTH:
+# 			self.xspeed *= -1
+# 		if y1 >= HEIGHT or y2 <= 0:
+# 			self.yspeed *= -1
+
+# WIDTH = 800
+# HEIGHT = 400
+
+# window = Tk()
+# canvas = Canvas(window, width=WIDTH, height=HEIGHT)
+# canvas.pack()
+
+# color_list = ["yellow", "green", "blue", "red", "orange", "pink", "grey", "black"]
+# balls_list = []
+
+# for i in range(10):
+# 	color = random.choice(color_list)
+# 	size = random.randrange(10, 100)
+# 	xspeed = random.randrange(1, 10)
+# 	yspeed = random.randrange(1, 10)
+# 	balls_list.append(Ball(canvas, color, size, 0, 0, xspeed, yspeed))
+
+# while True:
+# 	for ball in balls_list:
+# 		ball.move()
+# 	window.update()
+# 	time.sleep(0.05)
+
+# window.mainloop()
+# --------------------------------------------------
+# from tkinter import *
+# from PIL import Image, ImageTk
+# import time
+# import random
+
+# class Ball:
+# 	def __init__(self, canvas, color, size, x, y, xspeed, yspeed):
+# 		self.canvas = canvas
+# 		self.color = color
+# 		self.size = size
+# 		self.x = x
+# 		self.y = y
+# 		self.xspeed = xspeed
+# 		self.yspeed = yspeed
+# 		self.id = canvas.create_oval(x, y, x+size, y+size, fill=color, outline="")
+
+# 	def move(self):
+# 		self.canvas.move(self.id, self.xspeed, self.yspeed)
+# 		(x1, y1, x2, y2) = self.canvas.coords(self.id)
+# 		(self.x, self.y) = (x1, y1)
+# 		if x1 <= 0 or x2 >= WIDTH:
+# 			self.xspeed *= -1
+# 		if y1 >= HEIGHT or y2 <= 0:
+# 			self.yspeed *= -1
+
+# 	def load_img(self):
+# 		img = Image.open("space.png").resize((250, 150))
+# 		self.canvas.image = ImageTk.PhotoImage(img)
+# 		self.id = self.canvas.create_image(self.x-100, self.y-50, image=canvas.image, anchor="nw")
+# 		# self.id = canvas.create_oval(x, y, x+size, y+size, fill=color)
+
+# 	def isCollision(self, enemy):
+# 		x_diff = (self.x - enemy.x)**2
+# 		y_diff = (self.y - enemy.y)**2
+# 		dist = (x_diff + y_diff)**0.5
+# 		if dist < 20:
+# 			return True
+# 		else:
+# 			return False
+
+# 	def shrink(self):
+# 		self.size -= 10
+# 		self.canvas.delete(self.id)
+# 		self.id = canvas.create_oval(self.x, self.y, self.x+self.size, self.y+self.size, fill=self.color, outline="")
+
+# bullets = []
+# def fire(e):
+# 	bullets.append(Ball(canvas, "blue", 10, 150, spaceship.y, 10, 0))
+# 	print("bullet added !!")
+
+
+# WIDTH = 800
+# HEIGHT = 400
+
+# window = Tk()
+# canvas = Canvas(window, width=WIDTH, height=HEIGHT)
+# canvas.pack()
+# canvas.bind("<Button-1>", fire)
+
+# spaceship = Ball(canvas, "light grey", 100, 100, 200, 0, 5)
+# enemy = Ball(canvas, "red", 100, 500, 200, -0.2, 5)
+# spaceship.load_img()
+
+# while True:
+# 	for bullet in bullets:
+# 		bullet.move()
+# 		if bullet.isCollision(enemy):
+# 			print("collide !")
+# 			canvas.delete(bullet.id)
+# 			bullets.remove(bullet)
+# 			enemy.shrink()
+				
+# 		if bullet.x+bullet.size >= WIDTH:
+# 			canvas.delete(bullet.id)
+# 			bullets.remove(bullet)
+
+# 	if spaceship.isCollision(enemy):
+# 		print("Game Over !!")
+# 		break
+
+# 	if enemy.size < 10:
+# 		print("You win !!")
+# 		break
+
+# 	enemy.move()
+# 	window.update()
+# 	time.sleep(0.05)
+
+# window.mainloop()
+# ----------------------------------------------------
+# import turtle
+
+# def move(x, y):
+# 	t.penup()
+# 	t.goto(x, y)
+# 	t.pendown()
+
+# xpos = 50
+# ypos = -50
+# op = 1
+
+# t = turtle.Turtle()
+# t.shape("turtle")
+# t.circle(50)
+
+# for i in range(4):
+# 	move(xpos, ypos)
+# 	t.circle(50)
+# 	xpos += 50
+# 	ypos += 50*op
+# 	op *= -1
+
+# turtle.mainloop()
+# -------------------------------------------------
